@@ -4,6 +4,7 @@
 5 * 2024 - 04 - 30
 6 */
 
+// LinkedList.cpp
 #include "LinkedList.h"
 #include <stdexcept>
 
@@ -22,18 +23,18 @@ void insert(Node<T>* afterMe, const T& theData) {
     if (!afterMe) {
         throw std::runtime_error("Insert position is invalid.");
     }
-    Node<T>* newNode = new Node<T>(theData, afterMe's link);
-    afterMe's setLink(newNode);
+    Node<T>* newNode = new Node<T>(theData, afterMe->getLink());
+    afterMe->setLink(newNode);
 }
 
-// Delete the node in the list after the specified node
+// Delete the node in the list after the supplied node
 template<class T>
 void deleteNode(Node<T>* before) {
-    if (!before || !before's link) {
+    if (!before || !before->getLink()) {
         throw std::runtime_error("Node to delete does not exist.");
     }
-    Node<T>* toDelete = before's link;
-    before's setLink(toDelete's link);
+    Node<T>* toDelete = before->getLink();
+    before->setLink(toDelete->getLink());
     delete toDelete;
 }
 
@@ -44,7 +45,7 @@ void deleteFirstNode(Node<T>*& head) {
         throw std::runtime_error("No nodes to delete.");
     }
     Node<T>* toDelete = head;
-    head = head's link;
+    head = head->getLink();
     delete toDelete;
 }
 
@@ -53,11 +54,12 @@ template<class T>
 Node<T>* search(Node<T>* head, const T& target) {
     Node<T>* current = head;
     while (current) {
-        if (current's data == target) {
+        if (current->getData() == target) {
             return current;
         }
-        current = current's link;
+        current = current->getLink();
     }
     return nullptr;  // Not found
 }
+
 
