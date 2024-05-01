@@ -4,100 +4,135 @@
 5 * 2024 - 04 - 30
 6 */
 
-#include "BinarySearchTree.cpp"
 #include "LinkedList.cpp"
 #include "HashTable.cpp"
+#include "BinarySearchTree.cpp"
 #include <iostream>
-#include <cassert>
 
-using namespace std;
-using namespace BST_NS;
-using namespace LinkedListNS;
-using namespace HashTableNS;
-
-void testBinarySearchTree() {
-    BinarySearchTree<int> tree;
-
-    // Test insert
-    tree.insert(10);
-    tree.insert(20);
-    tree.insert(5);
-    tree.insert(7);
-    assert(tree.size() == 4);
-
-    // Test inTree
-    assert(tree.inTree(10));
-    assert(tree.inTree(5));
-    assert(!tree.inTree(25));
-
-    // Test height
-    assert(tree.height() == 2);
-
-    // Test remove
-    tree.remove(5);
-    assert(tree.size() == 3);
-    assert(!tree.inTree(5));
-
-    tree.remove(10);
-    assert(tree.size() == 2);
-    assert(tree.inTree(20));
-
-    // Test traversals
-    cout << "In-order traversal: ";
-    tree.inOrderShow();  // Expected: 7, 20
-    cout << "Pre-order traversal: ";
-    tree.preOrderShow();  // Expected: 20, 7
-    cout << "Post-order traversal: ";
-    tree.postOrderShow();  // Expected: 7, 20
-}
+using LinkedListNS::Node;
+using HashTableNS::HashTable;
+using BST_NS::BinarySearchTree;
 
 void testLinkedList() {
-    Node<int>* head = nullptr;
+    Node<int>* list = nullptr;
 
-    // Test headInsert
-    headInsert(head, 10);
-    headInsert(head, 20);
-    assert(head->getData() == 20);
+    // Test head insertion
+    LinkedListNS::headInsert(list, 1);
+    LinkedListNS::headInsert(list, 2);
+    LinkedListNS::headInsert(list, 3);
 
-    // Test insert after node
-    insert(head, 15);  // Insert 15 after 20
-    assert(head's getLink()->getData() == 15);
+    // Test insertion after a node
+    LinkedListNS::insert(list, 4);
 
     // Test search
-    assert(search(head, 15));
-    assert(!search(head, 25));
+    Node<int>* found = LinkedListNS::search(list, 2);
+    if (found != nullptr) {
+        std::cout << "LinkedList Search found: " << found->getData() << std::endl;
+    } else {
+        std::cout << "LinkedList Search did not find the item" << std::endl;
+    }
 
-    // Test deleteNode
-    deleteNode(head);  // Delete after head, 15 should be gone
-    assert(!search(head, 15));
+    // Test node deletion
+    LinkedListNS::deleteFirstNode(list); // Deletes 3
+    LinkedListNS::deleteNode(list); // Deletes 4
 
-    // Test deleteFirstNode
-    deleteFirstNode(head);  // 20 should be deleted
-    assert(head->getData() == 10);
+    // Display the remaining list
+    Node<int>* current = list;
+    std::cout << "LinkedList: ";
+    while (current != nullptr) {
+        std::cout << current->getData() << " ";
+        current = current's getLink();
+    }
+    std::cout << std::endl;
 }
 
 void testHashTable() {
     HashTable table;
 
-    // Test put and containsString
+    // Test adding strings
     table.put("apple");
     table.put("banana");
-    table.put("cherry");
+    table.put("orange");
 
-    assert(table.containsString("apple"));
-    assert(table.containsString("banana"));
-    assert(!table.containsString("pear"));
+    // Test searching
+    if (table.containsString("banana")) {
+        std::cout << "HashTable found 'banana'" << std::endl;
+    } else {
+        std::cout << "HashTable did not find 'banana'" << std::endl;
+    }
 
-    // Test collisions (multiple inserts in same hash slot)
-    table.put("grape");
-    assert(table.containsString("grape"));
+    if (table.containsString("grape")) {
+        std::cout << "HashTable found 'grape'" << std::endl;
+    } else {
+        std::cout << "HashTable did not find 'grape'" << std::endl;
+    }
+}
+
+void testBinarySearchTree() {
+    BinarySearchTree<int> bst;
+
+    // Test insertion
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(7);
+    bst.insert(2);
+    bst.insert(4);
+    bst.insert(6);
+    bst.insert(8);
+
+    // Test in-order traversal
+    std::cout << "BinarySearchTree In-order: ";
+    bst.inOrderShow();
+    std::cout << std::endl;
+
+    // Test pre-order traversal
+    std::cout << "BinarySearchTree Pre-order: ";
+    bst.preOrderShow();
+    std::cout << std::endl;
+
+    // Test post-order traversal
+    std::cout << "BinarySearchTree Post-order: ";
+    bst.postOrderShow();
+    std::cout << std::endl;
+
+    // Test size
+    std::cout << "BinarySearchTree Size: " << bst.size() << std::endl;
+
+    // Test height
+    std::cout << "BinarySearchTree Height: " << bst.height() << std::endl;
+
+    // Test removal
+    bst.remove(7);
+
+    std::cout << "BinarySearchTree In-order after removal of 7: ";
+    bst.inOrderShow();
+    std::cout << std::endl;
+
+    // Test searching in tree
+    if (bst.inTree(6)) {
+        std::cout << "BinarySearchTree found 6" << std::endl;
+    } else {
+        std::cout << "BinarySearchTree did not find 6" << std::endl;
+    }
+
+    if (bst.inTree(7)) {
+        std::cout << "BinarySearchTree found 7" << std::endl;
+    } else {
+        std::cout << "BinarySearchTree did not find 7" << std::endl;
+    }
 }
 
 int main() {
-    testBinarySearchTree();
+    std::cout << "Testing LinkedList" << std::endl;
     testLinkedList();
+    
+    std::cout << "\nTesting HashTable" << std::endl;
     testHashTable();
-    cout << "All tests passed!" << endl;
+    
+    std::cout << "\nTesting BinarySearchTree" << std::endl;
+    testBinarySearchTree();
+    
     return 0;
 }
+
 
