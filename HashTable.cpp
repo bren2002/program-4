@@ -4,19 +4,18 @@
 5 * 2024 - 04 - 30
 6 */
 
-#include "HashTable.h" 
-#include <stdexcept>
+#include "HashTable.h"
+#include <stdexcept>   
+#include "LinkedList.h"
 
 namespace HashTableNS {
 
-    // Constructor: Initialize empty hash table
     HashTable::HashTable() {
         for (int i = 0; i < SIZE; i++) {
             hashArray[i] = nullptr;
         }
     }
 
-    // Destructor: Clean up memory
     HashTable::~HashTable() {
         for (int i = 0; i < SIZE; i++) {
             Node<string>* current = hashArray[i];
@@ -28,7 +27,6 @@ namespace HashTableNS {
         }
     }
 
-    // Compute hash index for a given string
     int HashTable::computeHash(string s) {
         int hash = 0;
         for (char c : s) {
@@ -37,7 +35,6 @@ namespace HashTableNS {
         return hash;
     }
 
-    // Check if the hash table contains a specific string
     bool HashTable::containsString(string target) const {
         int index = computeHash(target);
         Node<string>* current = hashArray[index];
@@ -50,8 +47,7 @@ namespace HashTableNS {
         return false;
     }
 
-    // Add a new string to the hash table
-    void put(string s) {
+    void HashTable::put(string s) {
         int index = computeHash(s);
         if (!containsString(s)) {
             LinkedListNS::headInsert(hashArray[index], s);
