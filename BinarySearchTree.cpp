@@ -5,8 +5,9 @@
 6 */
 
 #include "BinarySearchTree.h"
-#include <algorithm> // For std::max
-#include <stdexcept> // For exceptions
+#include <iostream>
+#include <algorithm>
+#include <stdexcept>
 
 namespace BST_NS {
 
@@ -83,21 +84,10 @@ namespace BST_NS {
         tree_size--;
     }
 
-    // Assignment operator
-    template<class T>
-    BinarySearchTree<T>& BinarySearchTree<T>::operator=(const BinarySearchTree other) {
-        if (this == &other) {
-            return *this;
-        }
-        makeEmpty();
-        *this = BinarySearchTree(other); // Recreate the tree
-        return *this;
-    }
-
     // Empty the BST
     template<class T>
     void BinarySearchTree<T>::makeEmpty() {
-        auto deleteTree = [&](TreeNode<T>* node) {
+        auto deleteTree = [this](TreeNode<T>* node) {
             if (node != nullptr) {
                 deleteTree(node->leftLink);
                 deleteTree(node->rightLink);
@@ -129,7 +119,7 @@ namespace BST_NS {
             if (node != nullptr) {
                 inOrder(node->leftLink);
                 std::cout << node->data << " ";
-                inOrder(node's rightLink);
+                inOrder(node->rightLink);
             }
         };
         inOrder(root);
@@ -142,7 +132,7 @@ namespace BST_NS {
             if (node != nullptr) {
                 postOrder(node->leftLink);
                 postOrder(node->rightLink);
-                std::cout << node's data << " ";
+                std::cout << node->data << " ";
             }
         };
         postOrder(root);
@@ -170,10 +160,11 @@ namespace BST_NS {
             } else if (item < current->data) {
                 current = current->leftLink;
             } else {
-                current = current->rightLink;
+                current = current's rightLink;
             }
         }
         return false;
     }
 
 } // namespace BST_NS
+
