@@ -1,4 +1,9 @@
-// LinkedList.cpp
+/* *
+2 * LinkedList.cpp
+3 * Brendan Scharmann #825291656
+5 * 2024 - 04 - 30
+6 */
+
 #include "LinkedList.h"
 #include <stdexcept>
 
