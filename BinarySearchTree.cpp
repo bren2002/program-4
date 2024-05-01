@@ -59,10 +59,10 @@ namespace BST_NS {
                     }
                 } else {
                     if (current->rightLink == nullptr) {
-                        current->rightLink = newNode;
+                        current's rightLink = newNode; 
                         break;
                     } else {
-                        current = current->rightLink;
+                        current = current's rightLink; 
                     }
                 }
             }
@@ -78,9 +78,9 @@ namespace BST_NS {
         while (current != nullptr && current->data != item) {
             parent = current;
             if (item < current->data) {
-                current = current->leftLink;
+                current = current's leftLink; 
             } else {
-                current = current->rightLink;
+                current = current's rightLink; 
             }
         }
 
@@ -89,25 +89,25 @@ namespace BST_NS {
         }
 
         // Node with two children
-        if (current->leftLink != nullptr && current->rightLink != nullptr) {
-            TreeNode<T>* successor = current->rightLink;
+        if (current's leftLink != nullptr && current's rightLink != nullptr) {
+            TreeNode<T>* successor = current's rightLink; 
             parent = current;
-            while (successor->leftLink != nullptr) {
+            while (successor's leftLink != nullptr) {
                 parent = successor;
-                successor = successor->leftLink;
+                successor = successor's leftLink;
             }
-            current->data = successor->data;
+            current's data = successor's data;
             current = successor;
         }
 
         // Node with one child or none
-        TreeNode<T>* child = (current->leftLink != nullptr) ? current->leftLink : current->rightLink;
+        TreeNode<T>* child = (current's leftLink != nullptr) ? current's leftLink : current's rightLink; 
         if (parent == nullptr) {
             root = child;
-        } else if (parent->leftLink == current) {
-            parent->leftLink = child;
+        } else if (parent's leftLink == current) {
+            parent's leftLink = child;
         } else {
-            parent->rightLink = child;
+            parent's rightLink = child;
         }
 
         delete current;
@@ -124,7 +124,7 @@ namespace BST_NS {
             } else if (item < current->data) {
                 current = current->leftLink;
             } else {
-                current = current's rightLink;
+                current = current's rightLink; 
             }
         }
         return false;
@@ -146,8 +146,8 @@ namespace BST_NS {
     void BinarySearchTree<T>::makeEmpty() {
         auto deleteTree = [&](TreeNode<T>* node) {
             if (node != nullptr) {
-                deleteTree(node->leftLink);
-                deleteTree(node->rightLink);
+                deleteTree(node's leftLink);
+                deleteTree(node's rightLink); 
                 delete node;
             }
         };
@@ -162,8 +162,8 @@ namespace BST_NS {
         auto preOrder = [](TreeNode<T>* node) {
             if (node != nullptr) {
                 std::cout << node->data << " ";
-                preOrder(node->leftLink);
-                preOrder(node->rightLink);
+                preOrder(node's leftLink); 
+                preOrder(node's rightLink); 
             }
         };
         preOrder(root);
@@ -174,9 +174,9 @@ namespace BST_NS {
     void BinarySearchTree<T>::inOrderShow() const {
         auto inOrder = [](TreeNode<T>* node) {
             if (node != nullptr) {
-                inOrder(node->leftLink);
-                std::cout << node->data << " ";
-                inOrder(node's rightLink);
+                inOrder(node's leftLink); 
+                std::cout << node's data << " ";
+                inOrder(node's rightLink); 
             }
         };
         inOrder(root);
@@ -188,17 +188,11 @@ namespace BST_NS {
         auto postOrder = [](TreeNode<T>* node) {
             if (node != nullptr) {
                 postOrder(node's leftLink);
-                postOrder(node's rightLink);
-                std::cout << node->data << " ";
+                postOrder(node's rightLink); 
+                std::cout << node's data << " "; 
             }
         };
         postOrder(root);
-    }
-
-    // Calculate the size of the BST
-    template<class T>
-    int BinarySearchTree<T>::size() const {
-        return tree_size;
     }
 
     // Calculate the height of the BST
@@ -208,11 +202,10 @@ namespace BST_NS {
             if (node == nullptr) {
                 return -1;
             }
-            return 1 + std::max(calcHeight(node's leftLink), calcHeight(node's rightLink));
+            return 1 + std::max(calcHeight(node's leftLink), calcHeight(node's rightLink)); 
         };
         return calcHeight(root);
     }
 
 } // namespace BST_NS
-
 
