@@ -4,8 +4,7 @@
 5 * 2024 - 04 - 30
 6 */
 
-#include "HashTable.h"
-#include "LinkedList.cpp" 
+#include "HashTable.h" 
 #include <stdexcept>
 
 namespace HashTableNS {
@@ -52,7 +51,7 @@ namespace HashTableNS {
     }
 
     // Add a new string to the hash table
-    void HashTable::put(string s) {
+    void put(string s) {
         int index = computeHash(s);
         if (!containsString(s)) {
             LinkedListNS::headInsert(hashArray[index], s);
@@ -60,4 +59,3 @@ namespace HashTableNS {
     }
 
 } // namespace HashTableNS
-
