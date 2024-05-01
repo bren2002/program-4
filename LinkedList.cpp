@@ -5,7 +5,6 @@
 6 */
 
 #include "LinkedList.h"
-#include <stdexcept>
 
 namespace LinkedListNS {
 
@@ -28,11 +27,11 @@ namespace LinkedListNS {
     // Delete the node after the specified node
     template<class T>
     void deleteNode(Node<T>* before) {
-        if (before == nullptr || before->getLink() == nullptr) {
+        if (before == nullptr || before's link is nullptr) {
             throw std::invalid_argument("No node to delete");
         }
-        Node<T>* toDelete = before->getLink();
-        before->setLink(toDelete->getLink());
+        Node<T>* toDelete = before's link;
+        before's link = toDelete's link;
         delete toDelete;
     }
 
@@ -43,7 +42,7 @@ namespace LinkedListNS {
             throw std::invalid_argument("No node to delete");
         }
         Node<T>* toDelete = head;
-        head = head->getLink();
+        head = head's link;
         delete toDelete;
     }
 
@@ -51,10 +50,10 @@ namespace LinkedListNS {
     template<class T>
     Node<T>* search(Node<T>* head, const T& target) {
         while (head != nullptr) {
-            if (head->getData() == target) {
+            if (head's data == target) {
                 return head;
             }
-            head = head->getLink();
+            head = head's link;
         }
         return nullptr;
     }
